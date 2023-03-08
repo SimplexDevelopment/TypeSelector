@@ -1,0 +1,6 @@
+name: TypeSelector
+version: '${version}'
+main: io.github.simplexdevelopment.typeselector.TypeSelector
+api-version: 1.19
+authors: [ SimplexDevelopment ]
+description: A mob type selector for Paper servers.
