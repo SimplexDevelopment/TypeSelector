@@ -22,13 +22,13 @@ public class TropicalFishType extends AbstractGUI {
 
     @Override
     public void openMenu() {
-        int[] x = {Utility.getNextEmptySlot(22)};
         Utility.forEach(TropicalFish.Pattern.values(), pattern -> {
-            this.createInjection(x[0], pattern.name(), p -> {
+            if (this.getSelector().noMoreSlots()) return;
+            this.createInjection(this.getSelector().getSlot(), pattern.name(), p -> {
                 fish.setPattern(pattern);
                 bodyColor.openMenu();
             });
-            x[0] = Utility.getNextEmptySlot(x[0]);
+            this.getSelector().nextSlot();
         });
         this.dynamicSlotAssignment(this.getTupleList());
         this.open(player);
@@ -45,13 +45,13 @@ public class TropicalFishType extends AbstractGUI {
         }
 
         public void openMenu() {
-            int[] x = {Utility.getNextEmptySlot(22)};
             Utility.forEach(DyeColor.values(), dyeColor -> {
-                this.createInjection(x[0], dyeColor.name(), p -> {
+                if (this.getSelector().noMoreSlots()) return;
+                this.createInjection(this.getSelector().getSlot(), dyeColor.name(), p -> {
                     fish.setBodyColor(dyeColor);
                     patternColor.openMenu();
                 });
-                x[0] = Utility.getNextEmptySlot(x[0]);
+                this.getSelector().nextSlot();
             });
             this.dynamicSlotAssignment(this.getTupleList());
             this.open(player);
@@ -69,13 +69,13 @@ public class TropicalFishType extends AbstractGUI {
         }
 
         public void openMenu() {
-            int[] x = {Utility.getNextEmptySlot(22)};
             Utility.forEach(DyeColor.values(), dyeColor -> {
-                this.createInjection(x[0], dyeColor.name(), p -> {
+                if (this.getSelector().noMoreSlots()) return;
+                this.createInjection(this.getSelector().getSlot(), dyeColor.name(), p -> {
                     fish.setPatternColor(dyeColor);
                     p.closeInventory();
                 });
-                x[0] = Utility.getNextEmptySlot(x[0]);
+                this.getSelector().nextSlot();
             });
             this.dynamicSlotAssignment(this.getTupleList());
             this.open(player);

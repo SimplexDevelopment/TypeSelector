@@ -19,13 +19,15 @@ public class HorseType extends AbstractGUI {
 
     @Override
     public void openMenu() {
-        int[] x = {0};
         Utility.forEach(Horse.Color.values(), color -> {
-            this.createInjection(x[0], color.name(), p -> {
+            if (this.getSelector().noMoreSlots()) {
+                return;
+            }
+            this.createInjection(this.getSelector().getSlot(), color.name(), p -> {
                 horse.setColor(color);
                 horseStyle.openMenu();
             });
-            x[0] = Utility.getNextEmptySlot(x[0]);
+            this.getSelector().nextSlot();
         });
         this.dynamicSlotAssignment(this.getTupleList());
         this.open(player);
@@ -44,13 +46,13 @@ public class HorseType extends AbstractGUI {
 
         @Override
         public void openMenu() {
-            int[] x = {Utility.getNextEmptySlot(22)};
             Utility.forEach(Horse.Style.values(), style -> {
-                this.createInjection(x[0], style.name(), p -> {
+                if (this.getSelector().noMoreSlots()) return;
+                this.createInjection(this.getSelector().getSlot(), style.name(), p -> {
                     horse.setStyle(style);
                     p.closeInventory();
                 });
-                x[0] = Utility.getNextEmptySlot(x[0]);
+                this.getSelector().nextSlot();
             });
             this.dynamicSlotAssignment(this.getTupleList());
             this.open(player);

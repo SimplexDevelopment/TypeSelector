@@ -17,13 +17,13 @@ public class FoxType extends AbstractGUI {
 
     @Override
     public void openMenu() {
-        int[] x = {Utility.getNextEmptySlot(22)};
         Utility.forEach(Fox.Type.values(), type -> {
-            this.createInjection(x[0], type.name(), s -> {
+            if (this.getSelector().noMoreSlots()) return;
+            this.createInjection(this.getSelector().getSlot(), type.name(), s -> {
                 fox.setFoxType(type);
                 s.closeInventory();
             });
-            x[0] = Utility.getNextEmptySlot(x[0]);
+            this.getSelector().nextSlot();
         });
         this.dynamicSlotAssignment(this.getTupleList());
         this.open(player);

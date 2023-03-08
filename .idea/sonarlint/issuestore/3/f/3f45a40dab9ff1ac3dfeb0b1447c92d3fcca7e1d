@@ -1,5 +1,5 @@
 
-c	java:S116"NRename this field "INV" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷Ûü’
-g	java:S116"RRename this field "ACTIONS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª¨ﬁı
+c	java:S116"NRename this field "INV" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷Ûü’
+g	java:S116"RRename this field "ACTIONS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª¨ﬁı
 I
-java:S1611K"3Remove the parentheses around the "tuple" parameter(ú”ñÙ
+java:S1611R"3Remove the parentheses around the "tuple" parameter(ú”ñÙ

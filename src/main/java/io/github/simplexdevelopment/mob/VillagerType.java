@@ -20,13 +20,13 @@ public class VillagerType extends AbstractGUI {
 
     @Override
     public void openMenu() {
-        int[] x = {Utility.getNextEmptySlot(22)};
         Utility.forEach(Villager.Type.values(), type -> {
-            this.createInjection(x[0], type.name(), p -> {
+            if (this.getSelector().noMoreSlots()) return;
+            this.createInjection(this.getSelector().getSlot(), type.name(), p -> {
                 villager.setVillagerType(type);
                 villagerProfession.openMenu();
             });
-            x[0] = Utility.getNextEmptySlot(x[0]);
+            this.getSelector().nextSlot();
         });
         this.dynamicSlotAssignment(this.getTupleList());
         this.open(player);
@@ -43,14 +43,14 @@ public class VillagerType extends AbstractGUI {
         }
 
         public void openMenu() {
-            int[] x = {Utility.getNextEmptySlot(22)};
             Utility.forEach(Villager.Profession.values(), profession -> {
-                this.createInjection(x[0], profession.name(), p -> {
+                if (this.getSelector().noMoreSlots()) return;
+                this.createInjection(this.getSelector().getSlot(), profession.name(), p -> {
                     villager.setProfession(profession);
                     villager.setVillagerExperience(1); // This prevents loss of profession.
                     p.closeInventory();
                 });
-                x[0] = Utility.getNextEmptySlot(x[0]);
+                this.getSelector().nextSlot();
             });
             this.dynamicSlotAssignment(this.getTupleList());
             this.open(player);

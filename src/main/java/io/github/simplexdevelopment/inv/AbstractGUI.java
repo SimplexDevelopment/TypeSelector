@@ -3,6 +3,7 @@ package io.github.simplexdevelopment.inv;
 import io.github.simplexdevelopment.api.GUIAction;
 import io.github.simplexdevelopment.api.GUIWindow;
 import io.github.simplexdevelopment.util.DisplayableSlotEnum;
+import io.github.simplexdevelopment.util.Selector;
 import io.github.simplexdevelopment.util.Tuple;
 import io.github.simplexdevelopment.util.Utility;
 import net.kyori.adventure.text.Component;
@@ -23,11 +24,13 @@ public abstract class AbstractGUI implements GUIWindow {
     private final int[] slots = Utility.range(0, 44);
     private final Map<Integer, Material> slotMap = DisplayableSlotEnum.getSlotMaterialMap();
     private final Set<Tuple<Integer, String, GUIAction>> tupleList = new HashSet<>();
+    private final Selector selector;
 
     protected AbstractGUI(String name) {
         this.uuid = UUID.randomUUID();
         this.INV = Bukkit.createInventory(null, 45, Component.text(name));
         this.ACTIONS = new HashMap<>();
+        this.selector = new Selector(22, 5, 9);
         GUIWindow.getInvByUUID().put(getUUID(), this);
     }
 
@@ -63,6 +66,10 @@ public abstract class AbstractGUI implements GUIWindow {
     public void open(@NotNull Player p) {
         p.openInventory(INV);
         openInventories.put(p.getUniqueId(), getUUID());
+    }
+
+    public Selector getSelector() {
+        return selector;
     }
 
     public void createInjection(int slot, String name, GUIAction action) {

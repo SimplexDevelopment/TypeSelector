@@ -17,13 +17,13 @@ public class CatType extends AbstractGUI {
 
     @Override
     public void openMenu() {
-        int[] x = {Utility.getNextEmptySlot(22)};
         Utility.forEach(Cat.Type.values(), type -> {
-            this.createInjection(x[0], type.name(), p -> {
+            if (this.getSelector().noMoreSlots()) return;
+            this.createInjection(this.getSelector().getSlot(), type.name(), p -> {
                 cat.setCatType(type);
                 p.closeInventory();
             });
-            x[0] = Utility.getNextEmptySlot(x[0]);
+            this.getSelector().nextSlot();
         });
         this.dynamicSlotAssignment(this.getTupleList());
         this.open(player);
